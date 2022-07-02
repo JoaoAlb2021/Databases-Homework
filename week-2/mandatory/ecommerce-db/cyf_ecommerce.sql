@@ -103,3 +103,96 @@ INSERT INTO order_items (order_id, product_id, quantity) VALUES(8, 5, 1);
 INSERT INTO order_items (order_id, product_id, quantity) VALUES(9, 13, 2);
 INSERT INTO order_items (order_id, product_id, quantity) VALUES(10, 14, 1);
 INSERT INTO order_items (order_id, product_id, quantity) VALUES(10, 6, 5);
+
+
+--------------------TASK 01------------------------
+select * from customers where country = 'United States'
+---------------------------------------------------
+
+--------------------TASK 02------------------------
+select * from customers order by name
+---------------------------------------------------
+
+--------------------TASK 03------------------------
+select * from products where unit_price >100
+---------------------------------------------------
+
+--------------------TASK 04------------------------
+select * from products where product_name like '%socks%'
+---------------------------------------------------
+
+--------------------TASK 05------------------------
+select * from products order by unit_price desc limit 5
+---------------------------------------------------
+
+--------------------TASK 06------------------------
+select
+    products.product_name, products.unit_price, suppliers.supplier_name 
+from
+    products 
+INNER JOIN 
+    suppliers on products.supplier_id=suppliers.id 
+---------------------------------------------------
+
+--------------------TASK 07------------------------
+select
+    products.product_name, suppliers.supplier_name 
+from
+    products 
+INNER JOIN 
+    suppliers on products.supplier_id=suppliers.id 
+where 
+    suppliers.country='United Kingdom'
+---------------------------------------------------
+
+--------------------TASK 08------------------------
+select * from orders where customer_id=1
+---------------------------------------------------
+
+--------------------TASK 09------------------------
+select * from orders 
+where 
+    customer_id=(select id from customers where name = 'Hope Crosby')
+---------------------------------------------------
+
+--------------------TASK 10------------------------
+select products.product_name, products.unit_price, order_items.quantity from order_items
+inner join 
+    products on order_items.product_id=products.id
+inner join
+    orders on order_items.order_id=orders.id
+where 
+    order_reference='ORD006'
+---------------------------------------------------
+
+--------------------TASK 11------------------------
+select 
+    customers.name, orders.order_reference, orders.order_date, products.product_name, suppliers.supplier_name, order_items.quantity
+from  
+    order_items
+inner JOIN
+    orders on order_items.order_id=orders.id
+inner join 
+    products on order_items.product_id=products.id
+inner join
+    suppliers on products.supplier_id=suppliers.id
+inner join
+    customers on orders.customer_id=customers.id
+---------------------------------------------------
+
+--------------------TASK 12------------------------
+select 
+    customers.name, products.product_name, suppliers.supplier_name, suppliers.country
+from  
+    order_items
+inner JOIN
+    orders on order_items.order_id=orders.id
+inner join 
+    products on order_items.product_id=products.id
+inner join
+    suppliers on products.supplier_id=suppliers.id
+inner join
+    customers on orders.customer_id=customers.id
+where
+    suppliers.country='China'
+---------------------------------------------------
